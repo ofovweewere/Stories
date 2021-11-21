@@ -1,0 +1,202 @@
+<div class="row">
+    <div class="offset-md-3 col-md-6 col-sm-12">
+          <div class="login" id="contentArea">
+              <h1 class="display-4">Trainer Registration</h1>
+
+              <% if(messages.length > 0) { %>
+                <div id="messageArea" class="alert alert-danger">
+                  <%= messages %>
+                </div>
+              <% } %>
+
+              <form method="POST" id="registerForm" novalidate>
+                <p class="hint-text">Create your own account. It's free and only takes a minute.</p>
+                <div class="form-group">
+                  <div class="row">
+                    <p class="lead"><i class="fas fa-user-shield"></i> Personal Information</p>
+                    <div class="col-md-6">
+                      <input class="form-control" type="text" name="FirstName" id="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="col-md-6">
+                      <input class="form-control" type="text" name="LastName" id="lastName" placeholder="Last Name" required>
+                    </div>
+                    <div class="col-md-6">
+                      <input class="form-control" type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" required>
+                    </div>
+                    
+                   
+                  </div>
+                </div>
+
+                 <span class="lead"></i>Sex</span>
+                    <select name= "sex" class="sel1">
+                        <option>Female</option>
+                        <option>Male</option>
+                        
+                    </select>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="email" class="form-control" id="emailAddress" name="EmailAddress" required
+                      value="" placeholder="Email Address">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="date" class="form-control" id="birthDate" name="birthDate" required
+                      value="" placeholder="Date of Birth">
+                    </div>
+                    
+                  </div>
+                </div>
+                 <div class='jumbotron'>
+  <div class='container'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="text-center text-primary">Fillout Form</h3>
+      </div>
+    </div>
+
+    <form onsubmit="return false">
+      <!-- username -->
+      <div class='row w3-margin-bottom'>
+        <div class='col-md-6 col-xs-6'>
+          <p><b>Username</b></p>
+        </div>
+        <div class='col-md-6 col-xs-6'>
+          <input id="username" name='username' class='form-control'/>
+        </div>
+      </div>
+      <!-- end username row -->
+
+      <!-- password -->
+      <div class='row w3-margin-bottom'>
+        <div class='col-md-6 col-xs-6'>
+          <p><b>Password</b></p>
+        </div>
+        <div class='col-md-6 col-xs-6'>
+          <input type='password' name='password' id="password" class='form-control'/>
+        </div>
+      </div>
+      <!-- end password row -->
+
+      <!-- country -->
+      <div class='row w3-margin-bottom'>
+        <div class='col-md-6 col-xs-6'>
+          <p><b>Country</b></p>
+        </div>
+        <div class='col-md-6 col-xs-6'>
+          <select id="country" class='form-control' required><option value="">-- Country --</option></select>
+        </div>
+      </div>
+      <!-- end country row -->
+
+      <!-- region -->
+      <div class='row w3-margin-bottom'>
+        <div class='col-md-6 col-xs-6'>
+          <p><b>Region</b></p>
+        </div>
+        <div class='col-md-6 col-xs-6'>
+          <select id="region" class='form-control' required><option value="">-- Region --</option></select>
+        </div>
+      </div>
+      <!-- end region row -->
+
+      <!-- city -->
+      <div class='row w3-margin-bottom'>
+        <div class='col-md-6 col-xs-6'>
+          <p><b>City</b></p>
+        </div>
+        <div class='col-md-6 col-xs-6'>
+          <select id="city" class='form-control' required><option value="">-- City --</option></select>
+        </div>
+      </div>
+      <!-- end city row -->
+      <br>
+      <input type='submit' value='Register' onclick='processForm();' class='btn btn-primary center-block' />
+      </br>
+      <div id='location'></div>
+    </form>
+    <!-- end form -->
+  </div>
+  <!-- end container -->
+</div>
+<!-- end jumbotron -->
+
+<!-- footer -->
+<div class="container text-center text-primary">
+  <h4>Author: Sam-Shudukhi. (c) <a class='text-danger' href='https://github.com/Sam-Shudukhi/country-region-city-api' target='_blank'>Github</a></h4>
+</div>
+
+
+                <div class="form-group mt-4">
+                  <div class="row">
+                    <p class="lead"><i class="fas fa-database"></i>System Identification</p>
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" id="username" name="username"  required
+                      value="" placeholder="Username">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="password" class="form-control" id="password" name="password"  required
+                      value="" placeholder="Password">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"  required
+                      value="" placeholder="Confirm Password">
+                    </div>
+                  </div>
+                </div>
+                 
+                                                    
+                <div class="text-end mt-2">
+                  <button id="submitButton" type="submit" class="btn btn-primary">Register</button>
+                  <button id="cancelButton" type="reset" class="btn btn-warning"><i class="fas fa-undo fa-lg"></i> Cancel</button>
+                </div>
+              </form>
+             
+          </div>
+          <p class="text-center text-muted small">
+            Already have an account? 
+            <a href="/login">Sign in</a>
+          </p>
+    </div>
+</div>
+
+<script>
+name = (password = country = region = city = "");
+  username = $("#username").val();
+  password = $("#password").val();
+  country = $("#country").val();
+  region = $("#region").val();
+  city = $("#city").val();
+  if (
+    // username != "" &&
+    // password != "" &&
+    country != "" &&
+    region != "" &&
+    city != ""
+  ) {
+    $("#location").html(
+      // "Username: " +
+      //   username +
+      //   " /Password: " +
+      //   password +
+        "Locatation: Country: " +
+        country +
+        ", Region: " +
+        region +
+        ", City: " +
+        city
+    );
+  } else {
+    $("#location").html("Fill Country, Region and City to view the location");
+    return false;
+  }
+}
+</script>
