@@ -8,6 +8,6 @@ const router = express_1.default.Router();
 exports.default = router;
 const index_1 = require("../Controllers/index");
 router.get('/home', index_1.DisplayHomePage);
-router.get('/register', index_1.DisplayRegisterPage);
-router.post('/register', index_1.ProcessRegisterPage);
+router.get('/registerSeeker', index_1.DisplayRegisterSeekerPage);
+router.post('/registerSeeker', index_1.ProcessRegisterSeekerPage);
 //# sourceMappingURL=index.js.map

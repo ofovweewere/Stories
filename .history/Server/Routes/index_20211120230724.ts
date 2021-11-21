@@ -3,7 +3,7 @@ const router = express.Router();
 export default router;
 
 // instantiate an object of type index controller
-import { DisplayHomePage, DisplayRegisterSeekerPage, ProcessRegisterSeekerPage } from '../Controllers/index';
+import { DisplayAboutPage, DisplayContactPage, DisplayHomePage, DisplayLoginPage, DisplayProjectsPage, DisplayRegisterPage, DisplayServicesPage, ProcessLoginPage, ProcessLogoutPage, ProcessRegisterPage } from '../Controllers/index';
 
 /* GET home page. */
 //router.get('/', DisplayHomePage);
@@ -35,13 +35,13 @@ router.get('/home', DisplayHomePage);
 //router.post('/login', ProcessLoginPage);
 
 /* GET - Display register page - with /register. */
-router.get('/registerSeeker', DisplayRegisterSeekerPage);
+router.get('/register', DisplayRegisterPage);
 
 /* GET - Display register page - with /register. */
-//router.get('/trainerRegister', DisplayTrainerRegisterPage);
+router.get('/trainerRegister', DisplayTrainerRegisterPage);
 
 /* POST - Process register page when user clicks Register button. */
-router.post('/registerSeeker', ProcessRegisterSeekerPage);
+router.post('/register', ProcessRegisterPage);
 
 /* GET - Process logout page - with /logout. */
 //router.get('/logout', ProcessLogoutPage);

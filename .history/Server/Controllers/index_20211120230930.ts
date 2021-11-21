@@ -19,7 +19,7 @@ export function DisplayRegisterSeekerPage(req: Request, res: Response, next: Nex
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Seeker registration', page: 'registerSeeker', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
+       return  res.render('index', { title: 'Register', page: 'register', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }

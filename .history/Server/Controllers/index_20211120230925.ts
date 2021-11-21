@@ -15,11 +15,11 @@ export function DisplayHomePage(req: Request, res: Response, next: NextFunction)
 }
 
 
-export function DisplayRegisterSeekerPage(req: Request, res: Response, next: NextFunction): void
+export function DisplayRegisterPage(req: Request, res: Response, next: NextFunction): void
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Seeker registration', page: 'registerSeeker', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
+       return  res.render('index', { title: 'Register', page: 'register', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }

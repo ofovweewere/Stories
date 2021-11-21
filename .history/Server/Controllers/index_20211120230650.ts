@@ -15,11 +15,11 @@ export function DisplayHomePage(req: Request, res: Response, next: NextFunction)
 }
 
 
-export function DisplayRegisterSeekerPage(req: Request, res: Response, next: NextFunction): void
+export function DisplayRegisterPage(req: Request, res: Response, next: NextFunction): void
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Seeker registration', page: 'registerSeeker', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
+       return  res.render('index', { title: 'Register', page: 'register', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }
@@ -34,7 +34,7 @@ export function DisplayTrainerRegisterPage(req: Request, res: Response, next: Ne
 }
 */
 
-export function ProcessRegisterSeekerPage(req: Request, res: Response, next: NextFunction): void
+export function ProcessRegisterPage(req: Request, res: Response, next: NextFunction): void
 {
    // Instantiate a new User object 
    let newUser = new User
