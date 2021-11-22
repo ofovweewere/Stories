@@ -6,9 +6,6 @@ import SeekerUser from '../Models/tennisTrainerSeeker';
 
 //create an instance of the trainer model
 import TrainerUser from '../Models/tennisTrainer';
-
-//create an instance of the auditor model
-import AuditorUser from '../Models/auditor';
 import path from 'path';
 //import util functions
 import{UserDisplayName }from '../Util';
@@ -48,7 +45,7 @@ export function DisplayRegisterTrainerPage(req: Request, res: Response, next: Ne
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages:req.flash('registerMessage'), displayName: AuditorDisplayName(req)  });
+       return  res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages:req.flash('registerMessage'), displayName: TrainerDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }

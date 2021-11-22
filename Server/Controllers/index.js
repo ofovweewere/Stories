@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProcessLogoutPage = exports.ProcessRegisterTrainerPage = exports.ProcessRegisterSeekerPage = exports.DisplayRegisterTrainerPage = exports.DisplayRegisterSeekerPage = exports.DisplayHomePage = void 0;
+exports.ProcessLogoutPage = exports.ProcessRegisterTrainerPage = exports.ProcessRegisterAuditorPage = exports.ProcessRegisterSeekerPage = exports.DisplayRegisterTrainerPage = exports.DisplayRegisterAuditorPage = exports.DisplayRegisterSeekerPage = exports.DisplayHomePage = void 0;
 const passport_1 = __importDefault(require("passport"));
 const tennisTrainerSeeker_1 = __importDefault(require("../Models/tennisTrainerSeeker"));
 const tennisTrainer_1 = __importDefault(require("../Models/tennisTrainer"));
+const auditor_1 = __importDefault(require("../Models/auditor"));
 const Util_1 = require("../Util");
-const trainer_1 = require("../Util/trainer");
+const auditor_2 = require("../Util/auditor");
 const formidable = require('formidable');
 function DisplayHomePage(req, res, next) {
     res.render('index', { title: 'Home', page: 'home', displayName: (0, Util_1.UserDisplayName)(req) });
@@ -21,9 +22,16 @@ function DisplayRegisterSeekerPage(req, res, next) {
     return res.redirect('/tennis');
 }
 exports.DisplayRegisterSeekerPage = DisplayRegisterSeekerPage;
+function DisplayRegisterAuditorPage(req, res, next) {
+    if (!req.user) {
+        return res.render('index', { title: 'Auditor registration', page: 'registerAuditor', messages: req.flash('registerMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
+    }
+    return res.redirect('/tennis');
+}
+exports.DisplayRegisterAuditorPage = DisplayRegisterAuditorPage;
 function DisplayRegisterTrainerPage(req, res, next) {
     if (!req.user) {
-        return res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages: req.flash('registerMessage'), displayName: (0, trainer_1.TrainerDisplayName)(req) });
+        return res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages: req.flash('registerMessage'), displayName: (0, auditor_2.AuditorDisplayName)(req) });
     }
     return res.redirect('/tennis');
 }
@@ -50,6 +58,28 @@ function ProcessRegisterSeekerPage(req, res, next) {
     });
 }
 exports.ProcessRegisterSeekerPage = ProcessRegisterSeekerPage;
+function ProcessRegisterAuditorPage(req, res, next) {
+    let newUser = new tennisTrainerSeeker_1.default({
+        userType: "auditor",
+        username: req.body.username,
+        emailAddress: req.body.emailAddress,
+        displayName: req.body.FirstName + " " + req.body.LastName
+    });
+    auditor_1.default.register(newUser, req.body.password, (err) => {
+        if (err) {
+            console.error('Error: Inserting New User');
+            if (err.name == "UserExistsError") {
+                req.flash('registerMessage', 'Registration Error');
+            }
+            console.log('Error: User Already Exists');
+            return res.redirect('/registerAuditor');
+        }
+        return passport_1.default.authenticate('local')(req, res, () => {
+            return res.redirect('/home');
+        });
+    });
+}
+exports.ProcessRegisterAuditorPage = ProcessRegisterAuditorPage;
 function ProcessRegisterTrainerPage(req, res, next) {
     let newUser2 = new tennisTrainer_1.default({
         userType: "trainer",

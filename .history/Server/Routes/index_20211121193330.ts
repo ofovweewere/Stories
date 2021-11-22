@@ -43,7 +43,7 @@ var storage = multer.diskStorage({
   
   
 // instantiate an object of type index controller
-import { DisplayHomePage, DisplayRegisterSeekerPage,DisplayRegisterTrainerPage,DisplayRegisterAuditorPage, ProcessRegisterSeekerPage,ProcessRegisterTrainerPage,ProcessRegisterAuditorPage,ProcessLogoutPage } from '../Controllers/index';
+import { DisplayHomePage, DisplayRegisterSeekerPage,DisplayRegisterTrainerPage,DisplayRegisterAuditorPage, ProcessRegisterSeekerPage,ProcessRegisterTrainerPage,ProcessLogoutPage } from '../Controllers/index';
 
 /* GET home page. */
 //router.get('/', DisplayHomePage);
@@ -82,9 +82,6 @@ router.get('/registerTrainer', DisplayRegisterTrainerPage);
 
 /* GET - Display register auditor page - with /registerAuditor. */
 router.get('/registerAuditor', DisplayRegisterAuditorPage);
-
-/* POST - Process register auditor page when user clicks Register button. */
-router.post('/registerAuditor', ProcessRegisterAuditorPage);
 
 /* POST - Process register seeker page when user clicks Register button. */
 router.post('/registerSeeker', ProcessRegisterSeekerPage);

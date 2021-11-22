@@ -48,7 +48,7 @@ export function DisplayRegisterTrainerPage(req: Request, res: Response, next: Ne
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages:req.flash('registerMessage'), displayName: AuditorDisplayName(req)  });
+       return  res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages:req.flash('registerMessage'), displayName: TrainerDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }

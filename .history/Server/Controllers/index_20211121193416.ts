@@ -6,14 +6,11 @@ import SeekerUser from '../Models/tennisTrainerSeeker';
 
 //create an instance of the trainer model
 import TrainerUser from '../Models/tennisTrainer';
-
-//create an instance of the auditor model
-import AuditorUser from '../Models/auditor';
 import path from 'path';
 //import util functions
 import{UserDisplayName }from '../Util';
 import{TrainerDisplayName }from '../Util/trainer';
-import{AuditorDisplayName }from '../Util/auditor';
+
 const formidable = require('formidable');
 
 
@@ -39,7 +36,7 @@ export function DisplayRegisterAuditorPage(req: Request, res: Response, next: Ne
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Auditor registration', page: 'registerAuditor', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
+       return  res.render('index', { title: 'Seeker registration', page: 'registerSeeker', messages:req.flash('registerMessage'), displayName: UserDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }
@@ -48,7 +45,7 @@ export function DisplayRegisterTrainerPage(req: Request, res: Response, next: Ne
 {
     if(!req.user)
     {
-       return  res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages:req.flash('registerMessage'), displayName: AuditorDisplayName(req)  });
+       return  res.render('index', { title: 'Register Trainer', page: 'registerTrainer', messages:req.flash('registerMessage'), displayName: TrainerDisplayName(req)  });
     }
     return res.redirect('/tennis');
 }
@@ -77,40 +74,6 @@ export function ProcessRegisterSeekerPage(req: Request, res: Response, next: Nex
             }
             console.log('Error: User Already Exists');
             return res.redirect('/registerSeeker');
-        }
-        //after successful registration, login the user
-        return passport.authenticate('local')(req, res, ()=>{
-            
-           
-
-            return res.redirect('/home');
-        });
-   });
-}
-
-export function ProcessRegisterAuditorPage(req: Request, res: Response, next: NextFunction): void
-{
-   // Instantiate a new User object 
-   let newUser = new SeekerUser
-   ({
-       userType:"auditor",
-       username: req.body.username,
-       emailAddress: req.body.emailAddress,
-       displayName: req.body.FirstName + " " + req.body.LastName
-   });
-
-   AuditorUser.register(newUser, req.body.password, (err)=>
-   {
-        if(err)
-        {
-            console.error('Error: Inserting New User');
-            if(err.name == "UserExistsError")
-            {
-                req.flash('registerMessage', 'Registration Error');
-                
-            }
-            console.log('Error: User Already Exists');
-            return res.redirect('/registerAuditor');
         }
         //after successful registration, login the user
         return passport.authenticate('local')(req, res, ()=>{
