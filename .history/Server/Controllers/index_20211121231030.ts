@@ -22,17 +22,12 @@ const formidable = require('formidable');
 
 export function DisplayHomePage(req: Request, res: Response, next: NextFunction): void
 {
-    res.render('index', { title: 'Home', page: 'home' , displayName: ''});
+    res.render('index', { title: 'Home', page: 'home' , displayName: UserDisplayName(req)});
 }
 
 export function DisplaySeekerHome(req: Request, res: Response, next: NextFunction): void
 {
     res.render('index', { title: 'Seeker Home Page', page: 'seekerHome' , displayName: UserDisplayName(req)});
-}
-
-export function DisplaySeekerSearch(req: Request, res: Response, next: NextFunction): void
-{
-    res.render('index', { title: 'Seeker Search Page', page: 'seekerSearch' , displayName: UserDisplayName(req)});
 }
 
 

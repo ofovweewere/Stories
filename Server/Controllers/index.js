@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProcessLogoutPage = exports.ProcessRegisterTrainerPage = exports.ProcessRegisterAuditorPage = exports.ProcessRegisterSeekerPage = exports.DisplayRegisterTrainerPage = exports.DisplayRegisterAuditorPage = exports.DisplayRegisterSeekerPage = exports.DisplayHomePage = void 0;
+exports.ProcessLogoutPage = exports.ProcessRegisterTrainerPage = exports.ProcessRegisterAuditorPage = exports.ProcessRegisterSeekerPage = exports.DisplayRegisterTrainerPage = exports.DisplayRegisterAuditorPage = exports.DisplayRegisterSeekerPage = exports.DisplaySeekerSearch = exports.DisplaySeekerHome = exports.DisplayHomePage = void 0;
 const passport_1 = __importDefault(require("passport"));
 const tennisTrainerSeeker_1 = __importDefault(require("../Models/tennisTrainerSeeker"));
 const tennisTrainer_1 = __importDefault(require("../Models/tennisTrainer"));
@@ -12,9 +12,17 @@ const Util_1 = require("../Util");
 const auditor_2 = require("../Util/auditor");
 const formidable = require('formidable');
 function DisplayHomePage(req, res, next) {
-    res.render('index', { title: 'Home', page: 'home', displayName: (0, Util_1.UserDisplayName)(req) });
+    res.render('index', { title: 'Home', page: 'home', displayName: '' });
 }
 exports.DisplayHomePage = DisplayHomePage;
+function DisplaySeekerHome(req, res, next) {
+    res.render('index', { title: 'Seeker Home Page', page: 'seekerHome', displayName: (0, Util_1.UserDisplayName)(req) });
+}
+exports.DisplaySeekerHome = DisplaySeekerHome;
+function DisplaySeekerSearch(req, res, next) {
+    res.render('index', { title: 'Seeker Search Page', page: 'seekerSearch', displayName: (0, Util_1.UserDisplayName)(req) });
+}
+exports.DisplaySeekerSearch = DisplaySeekerSearch;
 function DisplayRegisterSeekerPage(req, res, next) {
     if (!req.user) {
         return res.render('index', { title: 'Seeker registration', page: 'registerSeeker', messages: req.flash('registerMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
