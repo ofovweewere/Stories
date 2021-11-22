@@ -16,6 +16,7 @@ import cors from 'cors';
 // authentication objects
 let localStrategy = passportLocal.Strategy; //alias
 import User from '../Models/tennisTrainerSeeker';
+import TrainerUser from '../Models/tennisTrainer';
 
 //Module for auth messaging and error management
 import flash from 'connect-flash';
@@ -77,7 +78,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //implement an auth strategy
-passport.use(User.createStrategy());
+passport.use(User.createStrategy(),TrainerUser.createStrategy());
 
 
 //Serialize and deserialize user data
