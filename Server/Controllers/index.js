@@ -51,31 +51,6 @@ function ProcessRegisterSeekerPage(req, res, next) {
 }
 exports.ProcessRegisterSeekerPage = ProcessRegisterSeekerPage;
 function ProcessRegisterTrainerPage(req, res, next) {
-    try {
-        if (!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
-        }
-        else {
-            let avatar = req.files.avatar;
-            avatar.mv('./uploads/' + avatar.name);
-            res.send({
-                status: true,
-                message: 'File is uploaded',
-                data: {
-                    name: avatar.name,
-                    mimetype: avatar.mimetype,
-                    size: avatar.size
-                }
-            });
-        }
-    }
-    catch (err) {
-        res.status(500).send(err);
-    }
-    console.log(console.log(req.body.files.foo));
     let newUser2 = new tennisTrainer_1.default({
         userType: "trainer",
         username: req.body.username,
