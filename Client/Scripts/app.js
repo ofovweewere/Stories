@@ -10,6 +10,9 @@
     }
     function Start() {
         console.log("App Started");
+        if (!!window.performance && window.performance.navigation.type == 2) {
+            window.location.reload();
+        }
         confirmDelete();
     }
     window.addEventListener("load", Start);

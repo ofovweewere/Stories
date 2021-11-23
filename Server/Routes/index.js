@@ -29,11 +29,13 @@ var storage = multer_1.default.diskStorage({
 var upload = (0, multer_1.default)({ storage: storage });
 const index_1 = require("../Controllers/index");
 router.get('/home', index_1.DisplayHomePage);
+router.get('/displayTrainerHome/:username', index_1.DisplayTrainerHome);
 router.get('/displaySeekerHome', index_1.DisplaySeekerHome);
 router.get('/displaySeekerSearch', index_1.DisplaySeekerSearch);
 router.get('/registerSeeker', index_1.DisplayRegisterSeekerPage);
 router.get('/registerTrainer', index_1.DisplayRegisterTrainerPage);
 router.get('/registerAuditor', index_1.DisplayRegisterAuditorPage);
+router.post('/displaySeekerSearch', index_1.ProcessSeekerSearchPage);
 router.post('/registerAuditor', index_1.ProcessRegisterAuditorPage);
 router.post('/registerSeeker', index_1.ProcessRegisterSeekerPage);
 router.get('/logout', index_1.ProcessLogoutPage);
@@ -45,10 +47,12 @@ router.post('/registerTrainer', upload.single('myImage'), (req, res, next) => {
         return next(error);
     }
     let newUser2 = new tennisTrainer_1.default({
+        hourlyRate: req.body.hourlyRate,
         aboutMe: req.body.aboutMe,
         certificate: file.filename,
         userType: "trainer",
         username: req.body.username,
+        anyGender: "Any gender",
         emailAddress: req.body.emailAddress,
         phoneNumber: req.body.phoneNumber,
         sex: req.body.sex,

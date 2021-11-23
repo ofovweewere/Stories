@@ -7,6 +7,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const passport_local_mongoose_1 = __importDefault(require("passport-local-mongoose"));
 const UserSchema = new Schema({
+    hourlyRate: Number,
     aboutMe: String,
     certificate: String,
     userType: String,
@@ -15,6 +16,7 @@ const UserSchema = new Schema({
     displayName: String,
     phoneNumber: Number,
     sex: String,
+    anyGender: String,
     birthDate: Date,
     province: String,
     city: String,
@@ -27,7 +29,7 @@ const UserSchema = new Schema({
         default: Date.now()
     }
 }, {
-    collection: "tennisTrainerSeeker"
+    collection: "tennisTrainer"
 });
 UserSchema.plugin(passport_local_mongoose_1.default);
 const Model = mongoose_1.default.model("TrainerContact", UserSchema);

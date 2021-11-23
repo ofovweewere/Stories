@@ -20,7 +20,7 @@ const UserSchema = new Schema({
         default: Date.now()
     }
 }, {
-    collection: "tennisTrainerSeeker"
+    collection: "auditor"
 });
 UserSchema.plugin(passport_local_mongoose_1.default);
 const Model = mongoose_1.default.model("Auditor", UserSchema);

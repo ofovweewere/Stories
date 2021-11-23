@@ -34,6 +34,8 @@ const passport_local_1 = __importDefault(require("passport-local"));
 const cors_1 = __importDefault(require("cors"));
 let localStrategy = passport_local_1.default.Strategy;
 const tennisTrainerSeeker_1 = __importDefault(require("../Models/tennisTrainerSeeker"));
+const tennisTrainer_1 = __importDefault(require("../Models/tennisTrainer"));
+const auditor_1 = __importDefault(require("../Models/auditor"));
 const connect_flash_1 = __importDefault(require("connect-flash"));
 const index_1 = __importDefault(require("../Routes/index"));
 const app = (0, express_1.default)();
@@ -64,7 +66,7 @@ app.use((0, express_session_1.default)({
 app.use((0, connect_flash_1.default)());
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
-passport_1.default.use(tennisTrainerSeeker_1.default.createStrategy());
+passport_1.default.use(tennisTrainerSeeker_1.default.createStrategy(), tennisTrainer_1.default.createStrategy(), auditor_1.default.createStrategy());
 passport_1.default.serializeUser(tennisTrainerSeeker_1.default.serializeUser());
 passport_1.default.deserializeUser(tennisTrainerSeeker_1.default.deserializeUser());
 app.use('/', index_1.default);
