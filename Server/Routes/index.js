@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 exports.default = router;
 const multer_1 = __importDefault(require("multer"));
+const moment_1 = __importDefault(require("moment"));
 const passport_1 = __importDefault(require("passport"));
 const tennisTrainer_1 = __importDefault(require("../Models/tennisTrainer"));
 var storage = multer_1.default.diskStorage({
@@ -46,6 +47,7 @@ router.post('/registerTrainer', upload.single('myImage'), (req, res, next) => {
         error.httpStatusCode = 400;
         return next(error);
     }
+    let ageCalculation = (0, moment_1.default)().diff(req.body.birthDate, 'years');
     let newUser2 = new tennisTrainer_1.default({
         hourlyRate: req.body.hourlyRate,
         aboutMe: req.body.aboutMe,
@@ -54,6 +56,7 @@ router.post('/registerTrainer', upload.single('myImage'), (req, res, next) => {
         username: req.body.username,
         anyGender: "Any gender",
         emailAddress: req.body.emailAddress,
+        age: ageCalculation,
         phoneNumber: req.body.phoneNumber,
         sex: req.body.sex,
         birthDate: req.body.birthDate,

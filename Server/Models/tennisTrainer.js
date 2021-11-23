@@ -20,6 +20,7 @@ const UserSchema = new Schema({
     birthDate: Date,
     province: String,
     city: String,
+    age: Number,
     created: {
         type: Date,
         default: Date.now()

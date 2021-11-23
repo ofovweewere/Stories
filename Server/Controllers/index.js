@@ -19,10 +19,57 @@ function DisplayHomePage(req, res, next) {
 }
 exports.DisplayHomePage = DisplayHomePage;
 function DisplayTrainerHome(req, res, next) {
+    var deferred = q_1.default.defer();
     let trainerName = req.params.username;
-    res.render('index', { title: 'Trainer Page', page: 'trainerHome', username: trainerName, displayName: (0, Util_1.UserDisplayName)(req) });
+    tennisTrainer_1.default.find({
+        "username": trainerName
+    }, function (err, docs) {
+        if (err) {
+            console.log('Error Finding Files');
+            deferred.reject(err);
+        }
+        else {
+            let hourlyRate = " ";
+            let aboutMe = " ";
+            let emailAddress = " ";
+            let displayName = " ";
+            let phoneNumber = " ";
+            let sex = " ";
+            let age = " ";
+            let province = " ";
+            let city = " ";
+            docs.forEach(function fn(doc) {
+                hourlyRate = `${doc.hourlyRate}`;
+                aboutMe = `${doc.aboutMe}`;
+                emailAddress = `${doc.emailAddress}`;
+                displayName = `${doc.displayName}`;
+                phoneNumber = `${doc.phoneNumber}`;
+                sex = `${doc.sex}`;
+                age = `${doc.age}`;
+                province = `${doc.province}`;
+                city = `${doc.city}`;
+            });
+            deferred.resolve({
+                hourlyRate: hourlyRate,
+                aboutMe: aboutMe,
+                emailAddress: emailAddress,
+                displayName: displayName,
+                phoneNumber: phoneNumber,
+                sex: sex,
+                age: age,
+                province: province,
+                city: city,
+                respond: res.render('index', { title: 'Trainer Page', page: 'trainerHome', city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, Util_1.UserDisplayName)(req) })
+            });
+        }
+    });
 }
 exports.DisplayTrainerHome = DisplayTrainerHome;
+function calculate_age(dob) {
+    var diff_ms = Date.now() - dob;
+    var age_dt = new Date(diff_ms);
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
 function DisplaySeekerHome(req, res, next) {
     res.render('index', { title: 'Seeker Home Page', page: 'seekerHome', displayName: (0, Util_1.UserDisplayName)(req) });
 }
@@ -72,7 +119,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -97,7 +144,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -122,7 +169,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -147,7 +194,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -172,7 +219,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -196,7 +243,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -222,7 +269,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -248,7 +295,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -274,7 +321,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -300,7 +347,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -326,7 +373,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -351,7 +398,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -375,7 +422,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -399,7 +446,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -423,7 +470,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -447,7 +494,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -471,7 +518,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
@@ -494,7 +541,7 @@ function ProcessSeekerSearchPage(req, res, next) {
                 else {
                     var names = [];
                     docs.forEach(function fn(doc) {
-                        var item = { title: `${doc.displayName}`, description: `${doc.aboutMe}`, username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
                         names.push(item);
                     });
                     deferred.resolve({
