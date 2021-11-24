@@ -19,8 +19,17 @@ import q from 'q';
 const formidable = require('formidable');
 
 
+// Display Functions
+export function DisplayCreateAccount(req: Request, res: Response, next: NextFunction): void
+{
+    res.render('indexTwo', { title: 'Create Account', page: 'createAccount' , displayName: ''});
+}
 
 // Display Functions
+export function DisplayDefaultHomePage(req: Request, res: Response, next: NextFunction): void
+{
+    res.render('indexTwo', { title: 'Main home page', page: 'defaultHome' , displayName: ''});
+}
 
 export function DisplayHomePage(req: Request, res: Response, next: NextFunction): void
 {

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProcessLogoutPage = exports.ProcessRegisterAuditorPage = exports.ProcessRegisterSeekerPage = exports.ProcessSeekerSearchPage = exports.DisplayRegisterTrainerPage = exports.DisplayRegisterAuditorPage = exports.DisplayRegisterSeekerPage = exports.DisplaySeekerSearch = exports.DisplaySeekerHome = exports.DisplayTrainerHome = exports.DisplayHomePage = void 0;
+exports.ProcessLogoutPage = exports.ProcessRegisterAuditorPage = exports.ProcessRegisterSeekerPage = exports.ProcessSeekerSearchPage = exports.DisplayRegisterTrainerPage = exports.DisplayRegisterAuditorPage = exports.DisplayRegisterSeekerPage = exports.DisplaySeekerSearch = exports.DisplaySeekerHome = exports.DisplayTrainerHome = exports.DisplayHomePage = exports.DisplayDefaultHomePage = exports.DisplayCreateAccount = void 0;
 const passport_1 = __importDefault(require("passport"));
 const tennisTrainerSeeker_1 = __importDefault(require("../Models/tennisTrainerSeeker"));
 const tennisTrainer_1 = __importDefault(require("../Models/tennisTrainer"));
@@ -14,6 +14,14 @@ const auditor_2 = require("../Util/auditor");
 const rateIndex_1 = require("../Util/rateIndex");
 const q_1 = __importDefault(require("q"));
 const formidable = require('formidable');
+function DisplayCreateAccount(req, res, next) {
+    res.render('indexTwo', { title: 'Create Account', page: 'createAccount', displayName: '' });
+}
+exports.DisplayCreateAccount = DisplayCreateAccount;
+function DisplayDefaultHomePage(req, res, next) {
+    res.render('indexTwo', { title: 'Main home page', page: 'defaultHome', displayName: '' });
+}
+exports.DisplayDefaultHomePage = DisplayDefaultHomePage;
 function DisplayHomePage(req, res, next) {
     res.render('index', { title: 'Home', page: 'home', displayName: '' });
 }

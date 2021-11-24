@@ -43,11 +43,13 @@ var storage = multer.diskStorage({
   
   
 // instantiate an object of type index controller
-import {DisplayTrainerHome,ProcessSeekerSearchPage,DisplaySeekerSearch,DisplaySeekerHome, DisplayHomePage, DisplayRegisterSeekerPage,DisplayRegisterTrainerPage,DisplayRegisterAuditorPage, ProcessRegisterSeekerPage,ProcessRegisterAuditorPage,ProcessLogoutPage } from '../Controllers/index';
+import {DisplayCreateAccount,DisplayDefaultHomePage,DisplayTrainerHome,ProcessSeekerSearchPage,DisplaySeekerSearch,DisplaySeekerHome, DisplayHomePage, DisplayRegisterSeekerPage,DisplayRegisterTrainerPage,DisplayRegisterAuditorPage, ProcessRegisterSeekerPage,ProcessRegisterAuditorPage,ProcessLogoutPage } from '../Controllers/index';
 
 /* GET home page. */
 //router.get('/', DisplayHomePage);
 
+/* GET home page. */
+router.get('/', DisplayDefaultHomePage);
 /* GET home page. */
 router.get('/home', DisplayHomePage);
 
@@ -73,6 +75,8 @@ router.get('/home', DisplayHomePage);
 
 /* POST - Process login page when user clicks Login button. */
 //router.post('/login', ProcessLoginPage);
+/* GET - Display trainer page. */
+router.get('/createAccount', DisplayCreateAccount);
 /* GET - Display trainer page. */
 router.get('/displayTrainerHome/:username', DisplayTrainerHome);
 /* GET - Display seeker page . */

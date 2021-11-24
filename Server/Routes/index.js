@@ -29,7 +29,9 @@ var storage = multer_1.default.diskStorage({
 });
 var upload = (0, multer_1.default)({ storage: storage });
 const index_1 = require("../Controllers/index");
+router.get('/', index_1.DisplayDefaultHomePage);
 router.get('/home', index_1.DisplayHomePage);
+router.get('/createAccount', index_1.DisplayCreateAccount);
 router.get('/displayTrainerHome/:username', index_1.DisplayTrainerHome);
 router.get('/displaySeekerHome', index_1.DisplaySeekerHome);
 router.get('/displaySeekerSearch', index_1.DisplaySeekerSearch);
